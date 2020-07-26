@@ -21,9 +21,10 @@ class ProjectController {
    */
   async index({ request, response }) {
 
-    // const projects = await Project.all() vem todos os dados
+    const { page } = request.get()
 
-    const projects = await Project.query().with('user').fetch()
+    // const projects = await Project.all() vem todos os dados
+    const projects = await Project.query().with('user').paginate(page)
     return projects
   }
 
